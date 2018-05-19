@@ -9,7 +9,7 @@
        shell: "curl -O http://54.161.178.255:8081/nexus/content/repositories/demo-repo/nexus/sample/1.0/sample-1.0.war"
     
 	- name: Configure application
-       copy: src=sample-1.0.war dest=/usr/share/tomcat/webapps/
+       copy: src=sample-1.0.war dest=/usr/share/tomcat8/webapps/
        notify:
         - Restart tomcat server 
 		
