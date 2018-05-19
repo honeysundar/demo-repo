@@ -11,14 +11,14 @@ node("Master")
       def AwsHOme = tool '/bin/'
          withEnv(["PATH+AWS=${tool '/bin/aws'}]"])
           {
-		     sh 'aws cloudformation create-stack --stack-name TomcatDemoSimpleApp --template-body sample-tomcat-web.json --parameters Subnets=subnet-4ac1ba76,subnet-7b396a1e'
+		    eho " sh 'aws cloudformation create-stack --stack-name TomcatDemoSimpleApp --template-body sample-tomcat-web.json --parameters Subnets=subnet-4ac1ba76,subnet-7b396a1e'"
 		  }		 
   }
    stage("Application deployment")
       {
 	     withEnv(["PATH+ANSIBLE=${tool '/usr/bin/"}])
 		   {
-		      sh 'ansible-playbook Application_install.yml'
+		     echo " sh 'ansible-playbook Application_install.yml' "
 		   }
 	  
 	  }
@@ -26,7 +26,7 @@ node("Master")
       {
 	   withEnv(["PATH+AWS+AWS=${tool '/bin/aws"}])
 		   {
-		      sh 'curl -O "<CNAME>"/sample/'
+		     eho " sh 'curl -O "<CNAME>"/sample/' "
 		   }
 	 
 	  }
