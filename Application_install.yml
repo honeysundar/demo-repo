@@ -1,0 +1,18 @@
+- name: Install simple tomcat app
+  hosts: all
+    tasks:
+     - name: Install tomcat 
+       yum: name=tomcat state=present
+       when: ansible_distribution == "CentOs"
+
+     - name: Download application from nexus repo
+       shell: "curl -O http://54.161.178.255:8081/nexus/content/repositories/demo-repo/nexus/sample/1.0/sample-1.0.war"
+    
+	- name: Configure application
+       copy: src=sample-1.0.war dest=/usr/share/tomcat/webapps/
+       notify:
+        - Restart tomcat server 
+		
+    handlers
+     - name: Restart tomcat server
+       command: service tomcat restart
